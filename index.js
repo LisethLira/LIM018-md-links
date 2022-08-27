@@ -2,98 +2,99 @@
 //   // ...
 // };
 
-// function links(archivo){
-//   if (archivo === 'link'){
-//   return true;
-//   }else{
-//     return false;
-//   }
-// }
-
-//console.log(links('image'));
-// const fs = require('fs');
-// function readingFile(path){
-// fs.readFile(path, 'utf-8', (err, data) => {
-  // if (err) throw err;
-  // console.log(data);
-  // let frase = '';
-  //let array = data.split('\r\n');
-  //console.log(array);
-  //for (let i = 0; i < array.length; i++) {
-    //const element = array[i];
-    
-  //}
-  //let newArray = [];
-  //let regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
- //let regexp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
-  //let arrayUrls = data.match(regexp);
-  // for (let i = 0; i < array.length; i++) {
-  //   if(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.includes(array[i])){
-  //     frase += array[i];
-  //   }
-    //newArray.push(array[i]);
-  //}
-  //console.log(arrayUrls);
-  //console.log(data.length);
-  //console.log (data.toString());
-  //console.log(data);
-// });
-// }
-
-//readingFile('./prueba.md');
-
-
-// const readline = require("readline"),
-//    fs = require("fs");
-//     //NOMBRE_ARCHIVO = "archivo.txt";
-//    function getLines(file){
-//       let array = [];
-//       let line = '';
-//       let links =[];
-//       let regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-//       let lector = readline.createInterface({
-//         input: fs.createReadStream(file)
-//     });
-    
-//      lector.on("line", linea => { 
-//       //console.log("Tenemos una línea:", linea);
-//       //array = linea.split(' ');
-//       let arrayUrls = linea.match(regexp);     
-//       console.log(arrayUrls);
-//     });
-      
-    
-      
-//     }
-// getLines('./prueba.md');
-
 const path = require("path");
-
-function pathToAbsolute(firstPath){
-if(path.isAbsolute(firstPath)){
-  return firstPath;
-}else{
-  return path.resolve(firstPath);
-}
-}
-pathToAbsolute('./prueba.md');
-console.log(pathToAbsolute('./prueba.md'));
-
 const fs = require('fs');
-function readingFile(path){
-  fs.readFile(path, 'utf-8', (err, data) => {
-   if (err) throw err;
-   //console.log(data);
-  function getLinks(data){ 
-    //let regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    let regexp = /\[([^\[]+)\](\(.*\))/gm;
-    // este es el regex = /\[([^\[]+)\](\(.*\))/gm -> regex
-   // otra opcion  /\[(.*?)\]\(.*?\)/gm -> por si aun lo quieren jejeje
-  let arrayUrls = data.match(regexp);
-  console.log(arrayUrls);
+//const fetch = require ('node-fetch');
+
+
+//FUNCIÓN PARA RUTA ABSOLUTA
+const pathToAbsolute = (firstPath) => {
+  if (path.isAbsolute(firstPath)) {
+    return firstPath;
+  } else {
+    return path.resolve(firstPath);
   }
-  getLinks(data);
- });
-};
-readingFile('./prueba.md');
+}
+
+//FUNCIÓN PARA SABER SI LA RUTA EXISTE
+const existsPath = (path) => fs.existsSync(path)
+
+//FUNCIÓN PARA VER SI ES DIRECTORIO
+const directoryVerification = (absolutePath) => {
+  const stats = fs.statSync(absolutePath);
+  return stats.isDirectory();
+}
+
+//FUNCIÓN PARA LEER DIRECTORIO Y UNIR A RUTA DE FILE
+const readDirectory = (absolutePath) => {
+  let arrayFilePaths = [];
+  const files = fs.readdirSync(absolutePath);
+  files.forEach((file) => {
+    file = path.normalize(path.join(absolutePath, file));
+    const stat = fs.statSync(file);
+    if (stat.isDirectory()) {
+      arrayFilePaths = arrayFilePaths.concat(readDirectory(file));
+    } else {
+      arrayFilePaths.push(file);
+    }
+  });
+  return arrayFilePaths;
+}
+
+//FUNCIÓN PARA OBTENER SOLO ARCHIVOS MD
+const mdFiles = (files) => {
+  let mdFilesPath = [];
+  if (!Array.isArray(files)) {
+    const extFile = path.extname(files);
+    if (extFile === '.md') {
+      return files;
+    }
+  } else {
+    files.forEach((file) => {
+      const extFile = path.extname(file);
+      if (extFile === '.md') {
+        //console.log('es archivo md', file);
+        mdFilesPath.push(file);
+      }
+    });
+    return mdFilesPath;
+  }
+}
+
+// FUNCIÓN PARA LEER UN ARCHIVO 
+const readFile = (paths) => {
+  if (!Array.isArray(paths)) {
+    const file = fs.readFileSync(paths, 'utf-8');
+    return file;
+  } else {
+    paths.forEach((path) => {
+      const fileArray = fs.readFileSync(path, 'utf-8');
+      return fileArray;
+    })
+  }
+}
+
+//FUNCIÓN PARA FILTRAR URLS
+const getLinks = (fileContent) => {
+  // const regex = /\[([^\[]+)\](\(.*\))/gm;
+  //const regex = /\[(.*?)\]\(.*?\)/gm;
+  //console.log(fileContent);
+  //console.log(typeof fileContent);
+  // const regexLinks = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n)]+)(?=\))/gi;
+  //const regexLinks = new RegExp (/\[([\w\s\d.()]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg);//link
+  const regexLinks = new RegExp (/\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg);
+  let links = fileContent.match(regexLinks);
+  console.log(links);
+}
+
 //petición a fetch
+
+module.exports = {
+  pathToAbsolute,
+  existsPath,
+  directoryVerification,
+  readDirectory,
+  mdFiles,
+  readFile,
+  getLinks,
+};
