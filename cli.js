@@ -13,11 +13,11 @@ const help = argumento.includes('--help');
 const helpText = `
 • ≻──────────────────────────────────── ⋆ ✩ ⋆ ────────────────────────────────────≺ •
 
-                                    || MDLINKS - LIS ||
+                                    || MDLINKS - LISETH ||
 
-                             ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
-                            |  md-links-lis <path> [options]  |          
-                             ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
+                             ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ 
+                            |  md-links-lis <path> [options] |          
+                             ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─  
                 
                 Puedes acceder a los siguientes comandos:
 
