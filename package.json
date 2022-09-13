@@ -1,13 +1,26 @@
 {
-  "name": "md-links",
+  "name": "md-links-liseth",
   "version": "0.1.0",
+  "author":"Liseth Lira Banda",
+  "main" : "./cli.js",
+  "description": "Librería que permite leer achivos MarkDown y extraer estadísticas de los links ",
+  
+  "bin": {
+    "md-links-lis": "./cli.js"
+  },
   "engines": {
     "node": ">=16.x"
   },
   "dependencies": {
+    "chalk": "^5.0.1",
+    "colors": "^1.4.0",
     "node-fetch": "^3.2.10"
   },
   "scripts": {
-    "start": "node mdLinks.js"
+    "start": "node mdLinks.js",
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0"
   }
 }
