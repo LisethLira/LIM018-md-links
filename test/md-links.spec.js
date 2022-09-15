@@ -1,16 +1,7 @@
-//const mdLinks = require('../');
 const { pathToAbsolute, existsPath, directoryVerify, readDirectory, extFile, readFile, getLinks, httpRequest, getLinksDirectory, httpRequestDirectory } = require('../index.js');
 const fetch = require ('node-fetch');
 
 jest.mock('node-fetch',()=> jest.fn());
-// describe('mdLinks', () => {
-//   it('should...', () => {
-//     console.log('FIX ME!');
-//   });
-
-// });
-
-
 
 describe('pathToAbsolute', () => {
   it('Deberia ser una función', () => {
@@ -64,19 +55,22 @@ describe('readDirectory', () => {
   });
 });
 
+const fileContentTest = `* [Función Callback - MDN](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
+</p></details>
 
-const fileContentTest = `texto prueba 2
-* [Función Callback - MDN](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
+[Modules: CommonJS modules - Node.js Docs](https://nodejs.org/docs/latest/api/modules.html)
+* [Funciones — bloques de código reutilizables - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions)
 </p></details>`;
 
-// describe('readFile', () => {
-//   it('Deberia ser una función', () => {
-//     expect(typeof readFile).toBe('function');
-//   });
-//   it('Debería devolver el contenido de un file', () => {
-//     expect(readFile('pruebaNueva.md')).toEqual(fileContentTest);
-//   });
-// });
+describe('readFile', () => {
+  it('Deberia ser una función', () => {
+    expect(typeof readFile).toBe('function');
+  });
+  it('Debería devolver el contenido de un file', () => {
+    //console.log(readFile('pruebaNueva.md'));
+    expect(readFile('pruebaNueva.md')).toEqual(fileContentTest);
+  });
+});
 
 const ArrayLinksFile = [
   {
@@ -164,7 +158,6 @@ const arrayLinksDirectory = [
   ]
 ]
 
-
 describe('getLinksDirectory', () => {
   it('Deberia ser una función', () => {
     expect(typeof getLinksDirectory).toBe('function');
@@ -173,83 +166,6 @@ describe('getLinksDirectory', () => {
     expect(getLinksDirectory('pruebas')).toStrictEqual(arrayLinksDirectory);
   });
 });
-
-// const arrayPromFile = [
-//   {
-//     href: 'https://es.wikipedia.org/wiki/Markdown',
-//     text: 'Markdown',
-//     file: 'prueba1.md',
-//     status: 200,
-//     ok: 'ok'
-//   },
-//   {
-//     href: 'https://nodejs.org/',
-//     text: 'Node.js',
-//     file: 'prueba1.md',
-//     status: 200,
-//     ok: 'ok'
-//   },
-//   {
-//     href: 'https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg',
-//     text: 'md-links',
-//     file: 'prueba1.md',
-//     status: 200,
-//     ok: 'ok'
-//   },
-//   {
-//     href: 'https://es.wikipedia.org/wiki/Markdown',
-//     text: 'Markdown',
-//     file: 'prueba1.md',
-//     status: 200,
-//     ok: 'ok'
-//   },
-//   {
-//     href: 'https://curriculum.laboratoria.la/es/topics/javascript/02-flow-control/03-functions',
-//     text: 'Funciones (control de flujo)',
-//     file: 'prueba1.md',
-//     status: 200,
-//     ok: 'ok'
-//   },
-//   {
-//     href: 'https://curriculum.laboratoria.la/es/topics/javascript/03-functions/',
-//     text: 'Funciones clásicas',
-//     file: 'prueba1.md',
-//     status: 200,
-//     ok: 'ok'
-//   },
-//   {
-//     href: 'https://developer.mozilla.org/es/docs/Glossary/Callback_function',
-//     text: 'Función Callback - MDN',
-//     file: 'prueba1.md',
-//     status: 200,
-//     ok: 'ok'
-//   },
-//   {
-//     href: 'https://nodejs.org/docs/latest/api/modules.html',
-//     text: 'Modules: CommonJS modules - Node.js Docs',
-//     file: 'prueba1.md',
-//     status: 200,
-//     ok: 'ok'
-//   },
-//   {
-//     href: 'https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions',
-//     text: 'Funciones — bloques de código reutilizables - MDN',
-//     file: 'prueba1.md',
-//     status: 404,
-//     ok: 'fail'
-//   }
-// ]
-
-// describe('httpRequest', () => {
-//   it('debería ser una función', () => {
-//     expect(typeof httpRequest).toBe('function');
-//   });
-//   it('Debería retornar un array de objetos', () => {
-//     return httpRequest('prueba1.md').then(res => {
-//       expect(res).toStrictEqual(arrayPromFile);
-//     });
-//   });
-// });
 
 const arrayPromDirectory = [
   [
@@ -288,17 +204,6 @@ const arrayPromDirectory = [
   ]
 ]
 
-// describe('httpRequestDirectory', () => {
-//   it('debería ser una función', () => {
-//     expect(typeof httpRequestDirectory).toBe('function');
-//   });
-//   it('Debería retornar un array de arrays de objetos', () => {
-//     return httpRequestDirectory('pruebas').then(res => {
-//       expect(res).toStrictEqual(arrayPromDirectory);
-//     });
-//   });
-// });
-
 const arrayPruebaNueva = [
     {
       href: 'https://developer.mozilla.org/es/docs/Glossary/Callback_function',
@@ -336,8 +241,8 @@ describe('httpRequest', () => {
   });
 });
 
-describe('validar links en directorio', () => {
-  it('Deberia retornar links validados', (done) => {
+describe('httpRequestDirectory', () => {
+  it('Deberia retornar links validados de directorio', (done) => {
      fetch.mockResolvedValueOnce({status: 200});
      fetch.mockResolvedValueOnce({status: 200});
      fetch.mockResolvedValueOnce({status: 200});
