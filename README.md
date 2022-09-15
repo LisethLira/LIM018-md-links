@@ -1,3 +1,92 @@
+# Markdow Links (md-links-liseth)
+## Indice
+* [1. Descripción](#id1)
+* [2. Instalación](#id2)
+* [3. Comandos CLI ](#id3)
+* [3.1. Path](#id4)
+* [3.2. Validate](#id5)
+* [3.3 Stats](#id6)
+* [3.4. Validate y stats](#id7)
+* [3.5. Help](#id8)
+
+## 1. Descripción <a name="id1"></a>
+Markdow Links es una librería de npm con la cual puedes analizar archivos markdow y extraer enlaces y estadisticas acerca del estados de estos. Todo esto proporcionando una ruta absoluta o relativa a una carpeta o archivo md. además de especificar los comandos según la información que desee obtener. 
+
+## 2. Instalación <a name="id2"></a>
+
+`npm i md-links-liseth`
+
+## 3. Comandos CLI <a name="id3"></a>
+Esta es el formato básico de como debe de usarse md-link-lis con la mayoría de comandos.
+
+`md-links-lis <path> [options]`
+
+`path`: Ruta absoluta o relativa al archivo o directorio.
+`options`: comandos a elegir según la info que requieras
+	`validate`: Opción para validar los links encontrados.
+	`stats`: Opción para obtener un output con información estadística general.
+	`validate y stats`: Combinar opciones para obtener estadísticas que necesiten de los resultados de la validación.
+`help`:  Info sobre el uso de comandos de mdlinks.
+
+**Ejemplos de uso:**
+
+*Pasando como la ruta:*
+
+`md-links-lis archivo.md`
+
+*Pasando la ruta + opción validate:*
+
+`md-links-lis archivo.md --validate`
+
+*Pasando la ruta + opción stats:*
+
+`md-links-lis archivo.md --stats`
+
+*Pasando la ruta + opciones validate y stats:*
+
+`md-links-lis archivo.md --validate --stats`
+
+*Pasando opción help:*
+
+`md-links-lis --help`
+
+### 3.1. Path<a name="id4"></a>
+Al pasar solo la ruta de un directorio o archivo md la información que nos muestra es un la ruta en la que se encuentra nuestro enlace, el enlace y un texto referente al contenido del enlace, algo similar a lo siguiente: 
+
+`md-links-lis <path>`
+
+![](https://github.com/LisethLira/LIM018-md-links/blob/main/images/md-links-path.png)
+
+### 3.2. Validate <a name="id5"></a>
+Al pasar la opción validate nos muestra los links validados con el estado en el que se encuentra dicho enlace.
+
+`md-links-lis <path> --validate`
+
+![](https://github.com/LisethLira/LIM018-md-links/blob/main/images/md-links-validation.png)
+
+### 3.3 Stats <a name="id6"></a>
+Al pasar la opción stats nos muestra las estadísticas generales de los links encontrados tales como el total de links encontrados y los links unicos, similar a lo siguiente:
+
+`md-links-lis <path> --stats`
+
+![](https://github.com/LisethLira/LIM018-md-links/blob/main/images/md-links-stats.png)
+
+### 3.4 Validate y Stats <a name="id7"></a>
+Al pasar la opción stats nos muestra las estadísticas de los links encontrados, además de el total de links y los links unicos también nos muestra los links rotos o dañados, similar a lo siguiente:
+
+`md-links-lis <path> --validate --stats`
+
+![](https://github.com/LisethLira/LIM018-md-links/blob/main/images/md-links-validate-stats.png)
+
+### 3.5 help <a name="id8"></a>
+Para cualquier duda acerca de como usar los comandos de md-links-lis podemos acceder a este comando para informarnos un poco.
+
+`md-links-lis --help`
+
+![](https://github.com/LisethLira/LIM018-md-links/blob/main/images/md-links-help.png)
+
+
+
 # Markdown Links
 
 ## Índice
