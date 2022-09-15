@@ -23,9 +23,9 @@ Esta es el formato básico de como debe de usarse md-link-lis con la mayoría de
 
 `path`: Ruta absoluta o relativa al archivo o directorio.
 `options`: comandos a elegir según la info que requieras
-	`validate`: Opción para validar los links encontrados.
-	`stats`: Opción para obtener un output con información estadística general.
-	`validate y stats`: Combinar opciones para obtener estadísticas que necesiten de los resultados de la validación.
+- `validate`: Opción para validar los links encontrados.
+- `stats`: Opción para obtener un output con información estadística general.
+- `validate y stats`: Combinar opciones para obtener estadísticas que necesiten de los resultados de la validación.
 `help`:  Info sobre el uso de comandos de mdlinks.
 
 **Ejemplos de uso:**
