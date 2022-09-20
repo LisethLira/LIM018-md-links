@@ -136,5 +136,5 @@ if (validate && stats) {
             broken: ${failCount}
     • ≻────────────── ✩ ──────────────≺ •
                 `));
-        }).catch((error) => console.log(color.magenta(error)));
+        }).catch((error) => console.log(colors.magenta(error)));
 }

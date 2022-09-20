@@ -1,10 +1,19 @@
 {
   "name": "md-links-liseth",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "author":"Liseth Lira Banda",
   "main" : "./cli.js",
   "description": "Librería que permite leer achivos MarkDown y extraer estadísticas de los links ",
-  
+  "license": "ISC",
+  "keywords": [
+    "javascript",
+    "MarkDown",
+    "url"
+  ],
+  "repository": { 
+    "type": "git",
+    "url": "https://github.com/LisethLira/LIM018-md-links.git"
+},
   "bin": {
     "md-links-lis": "./cli.js"
   },

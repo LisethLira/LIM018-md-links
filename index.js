@@ -68,9 +68,11 @@ const getLinks = (path) => {
       }
       linksComplete.push(linkObj);
     }
+    
   });
   return linksComplete;
 }
+
 //console.log(getLinks('prueba1.md'));
 
 //FUNCIÓN PARA CAPTURAR LINKS EN DIRECTORIO
@@ -83,12 +85,6 @@ const getLinksDirectory = (paths) => {
 }
 //console.log(getLinksDirectory('pruebas'));
 
-// const x = () => new Promise(resolve, rejct => {
-//   todo mo codigo 
-//   resolve()
-//   reject()
-// })
-
 //FUNCIÓN PARA PETICIONES A FETCH
 const httpRequest = (path) => {
   return new Promise((resolve, reject) => {
@@ -99,10 +95,15 @@ const httpRequest = (path) => {
         url.status = response.status;
         url.ok = response.status >= 400 ? 'fail' : 'ok';
         return url;
-      }).catch(error => console.log(error));
-  });
+      }).catch(()=>{
+      url.status = 'Servidor caído';
+      url.ok = 'fail';
+      return url;
+      });
+    });
+  
   resolve(Promise.all(arraylinkscomplete));
-  reject(new Error ('la petición fue rechazada'));
+  //reject(new Error ('la petición fue rechazada'));
   });
 };
 
